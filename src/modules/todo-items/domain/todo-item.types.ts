@@ -15,9 +15,3 @@ export interface CreateTodoItemProps {
   description: Description;
   priority: Priority;
 }
-
-export enum UserRoles {
-  admin = 'admin',
-  moderator = 'moderator',
-  guest = 'guest',
-}

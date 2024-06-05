@@ -8,7 +8,7 @@ import { UserRepository } from '../../application/repository/user.repository.int
 import { UserMapper } from '../../user.mapper';
 
 @Injectable()
-export class MongooseTodoItemRepository implements UserRepository {
+export class MongooseUserRepository implements UserRepository {
   constructor(
     @InjectModel(UserModel.name)
     private todoItemModel: Model<UserModel>,

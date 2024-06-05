@@ -9,6 +9,7 @@ import { TodoItemModule } from './modules/todo-items/todo-item.module';
 import { ContextInterceptor } from './libs/application/context/ContextInterceptor';
 import { ExceptionInterceptor } from './libs/application/interceptors/exception.interceptor';
 import { databaseConfig } from './configs/database.config';
+import { UserModule } from './modules/user/user.module';
 
 const interceptors = [
   {
@@ -28,6 +29,7 @@ const interceptors = [
     RequestContextModule,
     CqrsModule,
     TodoItemModule,
+    UserModule,
   ],
   providers: [...interceptors],
 })

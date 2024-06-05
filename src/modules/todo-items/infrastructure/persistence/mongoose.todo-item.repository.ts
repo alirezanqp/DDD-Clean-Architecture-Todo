@@ -1,19 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { TodoItemRepository } from '../../application/repository/todo-item.repository.interface';
 import { TodoItemEntity } from '../../domain/todo-item.entity';
-import { Connection } from 'mongoose';
-import { InjectConnection } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 import { TodoItemMapper } from '../../todo-item.mapper';
+import { TodoItem as TodoItemModel } from './todo-item.schema';
 
 @Injectable()
 export class MongooseTodoItemRepository implements TodoItemRepository {
   constructor(
-    @InjectConnection('TodoItem') private connection: Connection,
+    @InjectModel(TodoItemModel.name)
+    private todoItemModel: Model<TodoItemModel>,
     private mapper: TodoItemMapper,
   ) {}
-  create(entity: TodoItemEntity): void {
+
+  async create(entity: TodoItemEntity): Promise<void> {
     const record = this.mapper.toPersistence(entity);
+    await this.todoItemModel.create(record);
   }
+
   findAll(): TodoItemEntity[] {
     throw new Error('Method not implemented.');
   }

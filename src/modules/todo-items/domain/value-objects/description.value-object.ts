@@ -21,7 +21,5 @@ export class Description extends ValueObject<DescriptionProps> {
     if (typeof props.value !== 'string') {
       throw new Error(Description.INVALID_TYPE);
     }
-
-    this.props.value = props.value; // set props
   }
 }

@@ -6,7 +6,7 @@ export type TodoItemDocument = HydratedDocument<TodoItem>;
 @Schema({ _id: false })
 export class TodoItem {
   @Prop()
-  id: string;
+  _id: string;
 
   @Prop()
   title: string;
@@ -24,4 +24,4 @@ export class TodoItem {
   updatedAt: Date;
 }
 
-export const TodoItemModel = SchemaFactory.createForClass(TodoItem);
+export const TodoItemSchema = SchemaFactory.createForClass(TodoItem);

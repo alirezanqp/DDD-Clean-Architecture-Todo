@@ -7,16 +7,17 @@ import { ApiErrorResponse, IdResponse } from 'src/libs/api';
 import { CreateTodoItemRequestDto } from './dto/create-todo-item.request.dto';
 import { Result, match } from 'oxide.ts';
 import { AggregateID } from 'src/libs/ddd';
+import { log } from 'util';
 
 @Controller('todo-items')
-export class TodoItemController {
+export class TodoItemHttpController {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
   ) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create a user' })
+  @ApiOperation({ summary: 'Create a todo item' })
   @ApiResponse({
     status: HttpStatus.CREATED,
     type: IdResponse,
@@ -32,9 +33,11 @@ export class TodoItemController {
       priority: dto.priority,
     });
 
-    const result: Result<AggregateID, Error> = await this.commandBus.execute(
+    const result: Result<AggregateID, any> = await this.commandBus.execute(
       command,
     );
+
+    console.log(result);
 
     return match(result, {
       Ok: (id: string) => new IdResponse(id),

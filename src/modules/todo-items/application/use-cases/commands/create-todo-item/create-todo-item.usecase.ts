@@ -8,6 +8,7 @@ import { Title } from 'src/modules/todo-items/domain/value-objects/title.value-o
 import { Description } from 'src/modules/todo-items/domain/value-objects/description.value-object';
 import { Priority } from 'src/modules/todo-items/domain/value-objects/priority.value-object';
 import { TodoItemEntity } from 'src/modules/todo-items/domain/todo-item.entity';
+import { Ok } from 'oxide.ts';
 
 @CommandHandler(CreateTodoItemCommand)
 export class CreateTodoItemUseCase
@@ -29,6 +30,7 @@ export class CreateTodoItemUseCase
 
     try {
       await this.repository.create(todoItem);
+      return Ok(todoItem.id);
     } catch (error) {
       throw error;
     }

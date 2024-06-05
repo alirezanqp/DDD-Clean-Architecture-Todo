@@ -14,7 +14,7 @@ export class TodoItemMapper
 {
   toPersistence(entity: TodoItemEntity): TodoItemModel {
     return {
-      id: entity.id,
+      _id: entity.id,
       title: entity.getProps().title.unpack().value,
       description: entity.getProps().description.unpack().value,
       priority: entity.getProps().priority.unpack().value,
@@ -25,7 +25,7 @@ export class TodoItemMapper
 
   toDomain(record: any): TodoItemEntity {
     const entity = new TodoItemEntity({
-      id: record.id,
+      id: record._id,
       createdAt: record.createdAt,
       updatedAt: record.updatedAt,
       props: {
